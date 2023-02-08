@@ -1,5 +1,10 @@
 package com.example.pruebahttp2306directo.modelo;
 
+import lombok.Data;
+
+import java.util.Objects;
+
+@Data
 public class Item {
 
 	private long id = -1;
@@ -20,33 +25,16 @@ public class Item {
 		this.checked = checked;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public boolean getChecked() {
-		return checked;
-	}
-
-	public void setChecked(boolean checked) {
-		this.checked = checked;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Item)) return false;
+		Item item = (Item) o;
+		return description.equals(item.description);
 	}
 
 	@Override
-	public String toString() {
-		return "Item [id=" + id + ", description=" + description + ", checked=" + checked + "]";
+	public int hashCode() {
+		return Objects.hash(description);
 	}
-
 }

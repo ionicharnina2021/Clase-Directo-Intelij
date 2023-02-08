@@ -16,21 +16,32 @@ public class ItemService {
     private AtomicLong lastId = new AtomicLong();
 
     public ItemService() {
-       addItem(new Item(1,"cosas"));
+        addItem(new Item(1, "cosas"));
     }
 
-    public Item addItem(Item item){
-        long id=lastId.incrementAndGet();
-        item.setId(id);
-        items.put(id,item);
-        return item;
+
+    public Optional<Item> addItem(Item item) {
+        if (!items.containsValue(item)) {
+            long id = lastId.incrementAndGet();
+            item.setId(id);
+            items.put(id, item);
+           return Optional.of(item);
+        }
+        return Optional.empty();
     }
 
-    public Optional<Item> findItemById(Long id){
+    public Optional<Item> findItemById(Long id) {
         return Optional.ofNullable(items.get(id));
     }
 
-    public List<Item> findAll(){
+    public List<Item> findAll() {
         return items.values().stream().collect(Collectors.toList());
+    }
+    public Map<Long, Item> getItems() {
+        return items;
+    }
+
+    public Item getItemsStartWith(String inicial) {
+        return new Item(1,"comandante");
     }
 }
