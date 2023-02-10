@@ -44,4 +44,10 @@ public class ItemService {
     public Item getItemsStartWith(String inicial) {
         return new Item(1,"comandante");
     }
+
+    public boolean contains(Long id) {
+        return items.entrySet().stream().anyMatch((entry)->{
+            return entry.getValue().getId()==id;
+        });
+    }
 }

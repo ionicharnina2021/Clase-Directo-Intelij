@@ -3,6 +3,7 @@ package com.example.pruebahttp2306directo.Controllers;
 import com.example.pruebahttp2306directo.Services.ItemService;
 import com.example.pruebahttp2306directo.modelo.Item;
 import com.example.pruebahttp2306directo.modelo.ItemUpdateRequest;
+import com.example.pruebahttp2306directo.modelo.ItemUpdateRequestMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,11 @@ public class ItemsController {
         return itemService.getItemsStartWith(inicial);
     }
     @PutMapping("/{id}")
-    public void updateItem(@PathVariable Long id, @RequestBody ItemUpdateRequest itemUpdate){
-
+    public ResponseEntity<ItemUpdateRequest> updateItem(@PathVariable Long id, @RequestBody ItemUpdateRequest itemUpdate){
+        if(itemService.contains(id)){
+            return new ResponseEntity<ItemUpdateRequest>(new ItemUpdateRequestMapper().map(itemService.findItemById(id).get()),HttpStatus.OK);
+        }
+        return new ResponseEntity<ItemUpdateRequest>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Item> getItem(@PathVariable Long id){

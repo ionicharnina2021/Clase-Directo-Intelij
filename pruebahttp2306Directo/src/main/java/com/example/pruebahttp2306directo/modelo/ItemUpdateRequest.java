@@ -1,12 +1,15 @@
 package com.example.pruebahttp2306directo.modelo;
 
+import lombok.Builder;
+
 import java.util.Optional;
 
+@Builder
 public class ItemUpdateRequest {
     private Optional<String> description;
-    private Optional<boolean> cheked;
+    private Optional<Boolean> cheked;
 
-    public ItemUpdateRequest(Optional<String> description, Optional<boolean> cheked) {
+    public ItemUpdateRequest(Optional<String> description, Optional<Boolean> cheked) {
         this.description = description;
         this.cheked = cheked;
     }
