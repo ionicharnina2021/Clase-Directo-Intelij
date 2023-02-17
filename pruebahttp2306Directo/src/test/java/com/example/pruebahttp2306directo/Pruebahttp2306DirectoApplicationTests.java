@@ -6,8 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class Pruebahttp2306DirectoApplicationTests {
 
+
     @Test
-    void contextLoads() {
+    void contextLoads() throws Exception {
+
     }
 
+
+
 }
+
